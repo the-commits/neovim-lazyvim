@@ -145,6 +145,19 @@ return {
       current_line_blame = true,
       word_diff = true,
     },
+    keys = {
+      {
+        "<leader>gdiff",
+        function()
+          if vim.wo.diff then
+            vim.cmd("diffoff")
+          else
+            require("gitsigns").diffthis()
+          end
+        end,
+        desc = "Toggle git diff split",
+      },
+    },
   },
 
   {
