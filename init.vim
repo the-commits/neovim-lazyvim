@@ -3,5 +3,5 @@ let &packpath = &runtimepath
 source ~/.vimrc
 
 lua << EOF
-require('init')
+require('lazy-init')
 EOF
