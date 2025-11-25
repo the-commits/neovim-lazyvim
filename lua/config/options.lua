@@ -1,23 +1,23 @@
 -- Options are automatically loaded before lazy.nvim startup
 -- Default options that are always set: https://github.com/LazyVim/LazyVim/blob/main/lua/lazyvim/config/options.lua
 -- Add any additional options here
--- Läs in den snabba temp-katalogen från Fish shell-miljön
+-- Load the fast temp directory from Fish shell environment
 local tmp_dir = os.getenv("NVIM_TMP_DIR")
 
--- Kontrollera om variabeln är satt, annars använd standardplatsen
+-- Check if the variable is set, otherwise use the default location
 local cache_dir = vim.fn.stdpath("cache")
 local base_dir = tmp_dir and (tmp_dir .. "/") or (cache_dir .. "/")
 
--- 1. Swap-filer (directory): Använd /tmp (RAM) för hastighet
+-- 1. Swap files (directory): Use /tmp (RAM) for speed
 vim.opt.directory = base_dir .. "swp//"
 
--- 2. Undo-historik (undodir): Använd /tmp (RAM) för hastighet
+-- 2. Undo history (undodir): Use /tmp (RAM) for speed
 vim.opt.undodir = base_dir .. "undo//"
 
--- 3. Backup-filer (backupdir): Sätt den till /tmp också
+-- 3. Backup files (backupdir): Set it to /tmp as well
 vim.opt.backupdir = base_dir .. "bak//"
 
--- 4. Session/shada-historik
--- VIKTIGT: Shada (historiken) bör INTE vara på /tmp, eftersom den försvinner vid omstart.
--- Vi låter den ligga kvar på standardplatsen:
--- vim.opt.shadafile = cache_dir .. "/shada" -- (LazyVim hanterar detta)
+-- 4. Session/shada history
+-- IMPORTANT: Shada (history) should NOT be on /tmp, as it disappears on restart.
+-- We leave it in the default location:
+-- vim.opt.shadafile = cache_dir .. "/shada" -- (LazyVim handles this)

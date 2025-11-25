@@ -14,25 +14,25 @@ return {
 
       -- MASON-NIM-DAP SETUP
       require("mason-nvim-dap").setup({
-        -- Talar om för Mason vilka DAP-adaptrar som ska installeras
+        -- Tell Mason which DAP adapters should be installed
         ensure_installed = { "php-debug-adapter" },
       })
 
-      -- 1. Adapter (Hur Neovim startar debug-servern)
+      -- 1. Adapter (How Neovim starts the debug server)
       dap.adapters.php = {
         type = "executable",
         command = vim.fn.stdpath("data") .. "/mason/bin/php-debug-adapter",
-        args = { "-p", 9003 }, -- VIKTIGT: Korrekt sökväg till Mason-binär
+        args = { "-p", 9003 }, -- IMPORTANT: Correct path to Mason binary
       }
 
-      -- 2. Configuration (Hur Neovim ansluter till den)
+      -- 2. Configuration (How Neovim connects to it)
       dap.configurations.php = {
         {
           type = "php",
           request = "launch",
-          name = "Lyssna efter Xdebug",
+          name = "Listen for Xdebug",
           port = 9003,
-          -- source_mappings för Docker/WSL/Lokal miljö kan läggas till här
+          -- source_mappings for Docker/WSL/Local environment can be added here
         },
       }
     end,

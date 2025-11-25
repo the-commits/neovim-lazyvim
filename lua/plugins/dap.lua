@@ -11,30 +11,30 @@ return {
     },
     lazy = true,
     cmd = { "DapToggleBreakpoint", "DapContinue" },
-    keys = {
-      -- Standard keymaps för DAP
-      {
-        "<leader>b",
-        function()
-          require("dap").toggle_breakpoint()
-        end,
-        desc = "DAP: Toggle Breakpoint",
-      },
-      {
-        "<leader>dr",
-        function()
-          require("dap").continue()
-        end,
-        desc = "DAP: Run/Continue",
-      },
-      -- Lägg till alla andra DAP-keymaps här (t.ex. Step Over, Step Into, etc.)
-      {
-        "<leader>ds",
-        function()
-          require("dap").step_over()
-        end,
-        desc = "DAP: Step Over",
-      },
+  keys = {
+    -- Standard keymaps for DAP
+    {
+      "<leader>b",
+      function()
+        require("dap").toggle_breakpoint()
+      end,
+      desc = "DAP: Toggle Breakpoint",
+    },
+    {
+      "<leader>dr",
+      function()
+        require("dap").continue()
+      end,
+      desc = "DAP: Run/Continue",
+    },
+    -- Add all other DAP keymaps here (e.g. Step Over, Step Into, etc.)
+    {
+      "<leader>ds",
+      function()
+        require("dap").step_over()
+      end,
+      desc = "DAP: Step Over",
+    },
       {
         "<leader>di",
         function()
@@ -69,9 +69,9 @@ return {
       local dapui = require("dapui")
       require("dap-virtual-text").setup()
 
-      -- DAP UI Inställningar
+      -- DAP UI Settings
       dapui.setup({
-        -- Minimal setup för att säkerställa funktion
+        -- Minimal setup to ensure functionality
         controls = {
           layouts = {
             {
@@ -100,7 +100,7 @@ return {
         },
       })
 
-      -- Automatisk öppning/stängning av DAP UI
+      -- Automatic opening/closing of DAP UI
       dap.listeners.after.event_initialized["dapui_config"] = function()
         dapui.open()
       end
@@ -111,14 +111,10 @@ return {
         dapui.close()
       end
 
-      -- Keymaps för att öppna/stänga UI
+      -- Keymaps to open/close UI
       vim.keymap.set("n", "<leader>du", dapui.toggle, { desc = "DAP: Toggle UI" })
 
-      -- Lägg till en keymap för att hänga på Avante via MCP, om relevant
-      vim.keymap.set("n", "<leader>da", function()
-        require("dap").repl.open()
-        require("dap.repl").send_to_repl("MCPHub attach_agent Avante")
-      end, { desc = "DAP: Attach Avante via MCP" })
+      -- (External AI attach keymap removed)
     end,
   },
 }
