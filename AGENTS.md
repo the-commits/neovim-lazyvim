@@ -5,23 +5,21 @@
 ### Formatting Commands
 - `:Format` - Format current buffer (uses conform.nvim with language-specific formatters)
 - `:FormatWrite` - Format and write current buffer
-- For PHP: Uses Laravel Pint > PHPCS > PHP-CS-Fixer (priority order)
-- For JavaScript/TypeScript: Uses Prettier or Biome
 - For Lua: Uses Stylua (configured with 2-space indentation)
 - Run `stylua .` to format all Lua files in project
+- For single file: `stylua filename.lua`
 
 ### Linting Commands
 - `:Lint` - Run linters on current buffer
 - `:LintToggle` - Toggle linting on/off
-- JavaScript/TypeScript: ESLint via eslint_d
-- PHP: PHPStan for static analysis
-- Bash: Shellcheck
 - Lua: No specific linter configured
+- Uses LazyVim's integrated linting for other languages
 
 ### Testing
 - No specific test runner configured in this setup
 - Use terminal (`:terminal` or `<leader>sp1` for opencode terminal) to run project-specific test commands
 - For Lua plugins: Use `plenary.nvim` test framework if available
+- To run a single test, use the terminal to execute the specific test command for your project
 
 ## Code Style Guidelines
 
@@ -64,10 +62,7 @@
 - `<leader>oo` - Open output window
 - `<leader>od` - Open diff view
 - `:Opencode` - Main command
-
-### Avante (Alternative AI)
-- `<leader>af` - Send function/block to Avante
-- `<leader>ab` - Send entire buffer to Avante
+- Terminal access: `<leader>sp1`
 
 ## Key Development Tools
 
