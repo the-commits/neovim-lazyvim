@@ -1,81 +1,26 @@
-# Neovim Configuration Guide for AI Agents
+# AI Agents Guide (Neovim config)
 
-## Build/Lint/Test Commands
-
-### Formatting Commands
-- `:Format` - Format current buffer (uses conform.nvim with language-specific formatters)
-- `:FormatWrite` - Format and write current buffer
-- For Lua: Uses Stylua (configured with 2-space indentation)
-- Run `stylua .` to format all Lua files in project
-- For single file: `stylua filename.lua`
-
-### Linting Commands
-- `:Lint` - Run linters on current buffer
-- `:LintToggle` - Toggle linting on/off
-- Lua: No specific linter configured
-- Uses LazyVim's integrated linting for other languages
-
-### Testing
-- No specific test runner configured in this setup
-- Use terminal (`:terminal` or `<leader>sp1` for opencode terminal) to run project-specific test commands
-- For Lua plugins: Use `plenary.nvim` test framework if available
-- To run a single test, use the terminal to execute the specific test command for your project
+## Build / Lint / Test
+- **Build**: `:lua require('lazy').sync()` – sync plugins & compile Lua.
+- **Lint**: `:LspInfo` (via built‑in LSP) or `:Format`/`:FormatWrite` (stylua).
+- **Test**: `lua require('plenary.test_harness').test_directory('lua', {minimal_init='tests/minimal_init.lua'})`.
+- **Single test**: `nvim --headless -c "PlenaryBustedDirectory tests/<test_file>.lua { minimal_init = 'tests/minimal_init.lua' }" -c qa`.
 
 ## Code Style Guidelines
+- **Imports**: `local foo = require('module.foo')`; separate stdlib, external, and local modules; alphabetical within groups.
+- **Formatting**: 2‑space indentation, max line length 120, no trailing whitespace, spaces around `=` in tables.
+- **Types**: Dynamic Lua; annotate complex structures with comments (`---@type table<string,number>`).
+- **Naming**:
+  - Functions & variables: `camelCase`.
+  - Files: `snake_case.lua`.
+  - Private helpers: prefix with `_`.
+- **Error handling**: Wrap risky calls in `pcall`, check results, and report via `vim.notify('msg', vim.log.levels.ERROR)`.
 
-### Imports
-- Lua: Use `require()` for module imports
-- Follow existing patterns in `lua/plugins/` directory
-- Group standard library imports separately from plugin imports
-- Use relative paths for local modules
+## Tooling & Keymaps
+- **Opencode**: `:Opencode`, `<leader>og/oi/oo/od`.
+- **Debug**: `<leader>b`, `<leader>dr`, `<leader>ds/di/do`, `<leader>du`.
+- **Git**: `<leader>mg` (LazyGit), `<leader>gdiff`.
 
-### Formatting
-- Indentation: 2 spaces (Stylua config: `stylua.toml`)
-- Line width: 120 characters
-- No trailing whitespace
-- Consistent spacing around operators
-- Use spaces around = in tables: `{ key = value }`
-
-### Types
-- Lua: No static typing (dynamically typed)
-- Use descriptive variable names
-- Follow existing naming conventions in codebase
-- Use type annotations in comments when helpful
-
-### Naming Conventions
-- Variables/functions: camelCase
-- Files: snake_case.lua
-- Plugin configurations: Match plugin documentation style
-- Private functions: prefixed with underscore (_privateFunction)
-
-### Error Handling
-- Use `pcall()` for safe function calls
-- Check return values before using them
-- Provide meaningful error messages when possible
-- Use `vim.notify()` for user-facing errors
-
-## AI Integration
-
-### Opencode
-- `<leader>og` - Toggle Opencode UI
-- `<leader>oi` - Open input window
-- `<leader>oo` - Open output window
-- `<leader>od` - Open diff view
-- `:Opencode` - Main command
-- Terminal access: `<leader>sp1`
-
-## Key Development Tools
-
-### Debugging (DAP)
-- `<leader>b` - Toggle breakpoint
-- `<leader>dr` - Run/Continue debugging
-- `<leader>ds/di/do` - Step over/into/out
-- `<leader>du` - Toggle debug UI
-
-### Git Integration
-- `<leader>mg` - LazyGit terminal
-- `<leader>gdiff` - Toggle git diff split
-
-### Project Management
-- `<leader>fp` - Find project files
-- `<leader>fw` - Find words in project
+## Cursor / Copilot Rules
+- No cursor rules found (`.cursor/rules/` absent).
+- No Copilot instructions (`.github/copilot-instructions.md` absent).
